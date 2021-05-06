@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaflet Tutorial</title>
+
+    <!-- 必要なスクリプトを読み込む -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
+
+</head>
+<body>
+    <div style="margin:32px 0;">
+        <a href="https://leafletjs.com/">Leafletの公式サイト</a>
+        <a href="https://leafletjs.com/plugins.html">デフォルト以外の機能を調べる(プラグイン)</a>
+    </div>
+
+    <!-- マップをここに代入する -->
+    <div id="mapcontainer" style="width:600px;height:600px"></div>
+
+    <!-- マップ用スクリプト -->
+    <script>
+        // ページが読み込まれたら
+        $(function() {
+            // マップを #mapcontainer に代入する
+            var map = L.map('mapcontainer');
+
+            // ([緯度, 経度], 高さ(数字が大きいと拡大)) を地図の初期位置に設定する(中央の座標)
+            map.setView([35.64731469517385, 139.7359654200911], 19);
+
+            // 表示する地図画像のURLを設定して、地図に追加する
+            L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png', {
+                attribution: "<a href='https://maps.gsi.go.jp/development/ichiran.html' target='_blank'>地理院タイル</a>"
+            }).addTo(map);
+
+            // 地図上にマーカーを追加する [緯度, 経度]で座標指定
+            // マーカーに色をつける場合 https://github.com/leaflet-extras/leaflet.sprite を参照
+            var marker1 = L.marker([35.64731469517385, 139.7359654200911], {title:"Life is Tech! 白金高輪本校"}).addTo(map);
+            var marker2 = L.marker([35.64694408442576, 139.7358412821736], {title:"Life is Tech! 白金高輪新館"}).addTo(map);
+
+            // マーカーをクリックした時に出てくる情報を設定する
+            marker1.bindPopup("Life is Tech! 白金高輪本校です。");
+            marker2.bindPopup("Life is Tech! 白金高輪新館です。");
+
+        });
+    </script>
+
+</body>
+</html>

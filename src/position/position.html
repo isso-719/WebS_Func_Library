@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Position Tutorial</title>
+
+    <!-- 必要なスクリプトを読み込む -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+</head>
+<body>
+
+    <!-- ここに取得ボタンと結果を表示 -->
+    <div class="container">
+        <button onclick="get_position();">現在地を取得する(少し時間かかるかも)</button>
+    </div>
+
+    <!-- 位置情報取得用スクリプト -->
+    <script>
+
+        // デバイスの位置を取得する関数
+        function get_position() {
+            // 現在地を取得して関数 put_position に出力&実行する
+            navigator.geolocation.getCurrentPosition(put_position);
+        }
+
+        // 現在地の情報をユーザーに返す関数
+        function put_position(position) {
+
+            // 緯度を画面に出力(position.coords.latitude は緯度を表す)
+            $('.container').append("<p>緯度: " + position.coords.latitude + "</p>")
+
+            // 経度を画面に出力(position.coords.longitude は経度を表す)
+            $('.container').append("<p>経度: " + position.coords.longitude + "</p>")
+        }
+
+    </script>
+
+</body>
+</html>
